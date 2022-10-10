@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
+import { Card } from "@mui/material";
 
 function App() {
-  return <div className="app">HELLO WORLD</div>;
+  return <Card>HELLO WORLD</Card>;
 }
 
 export default App;
