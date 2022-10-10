@@ -1,1 +1,1 @@
-## Cycle Rental Systmem based on ReactJS + Firebase
+## Cycle Rental System based on ReactJS + Firebase
