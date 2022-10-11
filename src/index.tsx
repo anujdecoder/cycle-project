@@ -4,15 +4,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material";
 import theme from "./configs/theme";
+import { AppProvider } from "./providers";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </AppProvider>
   </React.StrictMode>
 );
 

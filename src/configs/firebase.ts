@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyAqw6hyyEtFNQc_fo66DffWQHTDDXK6b_I",
   authDomain: "cycle-project-8e606.firebaseapp.com",
   projectId: "cycle-project-8e606",
@@ -10,9 +10,11 @@ const firebaseConfig = {
   appId: "1:223601535964:web:abcb6b6962767febf1fd19",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(config);
+const auth = getAuth(app);
 
-export const auth = getAuth(app);
+const firebaseConfig = {
+  auth,
+};
 
-export default app;
+export default firebaseConfig;

@@ -1,7 +1,12 @@
 import React from "react";
-import { Card } from "@mui/material";
+import { Card, CircularProgress } from "@mui/material";
+import { useApp } from "./providers";
 
 function App() {
+  const { initializing } = useApp();
+  if (initializing) {
+    return <CircularProgress />;
+  }
   return <Card>HELLO WORLD</Card>;
 }
 
