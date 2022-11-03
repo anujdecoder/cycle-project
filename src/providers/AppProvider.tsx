@@ -10,11 +10,13 @@ interface Props {
 type AppProviderType = {
   loggedIn?: boolean
   user?: User | null
+  loading?: boolean
 }
 
 const defaultValue: AppProviderType = {
   loggedIn: false,
-  user: null
+  user: null,
+  loading: true
 }
 
 const AppContext = React.createContext<AppProviderType>(defaultValue)
@@ -28,6 +30,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setState((draft) => {
         draft.user = user
         draft.loggedIn = !!user
+        draft.loading = false
       })
     },
     [setState]

@@ -1,27 +1,33 @@
 import React from 'react'
-import { Card, CircularProgress } from '@mui/material'
-import { useApp } from './providers'
-import AuthService from './services/AuthService'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useSnackbar } from 'notistack'
+import { AppProvider } from './providers'
+import Containers from './containers'
 
 function App() {
-  const { loggedIn } = useApp()
-  if (loggedIn) {
-    return <CircularProgress />
-  }
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const data = new FormData(e.target as any)
-    const values: any = Object.fromEntries(data.entries())
-    AuthService.signup(values.email, values.password)
-  }
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        cacheTime: 1000 * 60 * 60,
+        refetchOnWindowFocus: true,
+        retry: false,
+        staleTime: Infinity
+      },
+      mutations: {
+        onError: (e: any) => {
+          enqueueSnackbar(e.message, { variant: 'error' })
+        }
+      }
+    }
+  })
+
   return (
-    <Card>
-      <form onSubmit={handleSubmit}>
-        <input name="email" placeholder="email" type="email" />
-        <input name="password" placeholder="password" type="password" />
-        <button type="submit">Signup</button>
-      </form>
-    </Card>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <Containers />
+      </AppProvider>
+    </QueryClientProvider>
   )
 }
 

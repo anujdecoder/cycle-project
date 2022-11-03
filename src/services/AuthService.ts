@@ -1,30 +1,28 @@
-import firebaseConfig from "../configs/firebase";
+import firebaseConfig from '../configs/firebase'
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  User,
-} from "firebase/auth";
+  User
+} from 'firebase/auth'
+import { LoginInput, SignupInput } from '../types/Auth'
 
-const auth = firebaseConfig.auth;
+const auth = firebaseConfig.auth
 
-const signup = (email: string, password: string) =>
-  createUserWithEmailAndPassword(auth, email, password);
+const signup = (input: SignupInput) => createUserWithEmailAndPassword(auth, input.email, input.password)
 
-const login = (email: string, password: string) =>
-  signInWithEmailAndPassword(auth, email, password);
+const login = (input: LoginInput) => signInWithEmailAndPassword(auth, input.email, input.password)
 
-const logout = () => signOut(auth);
+const logout = () => signOut(auth)
 
-const subscribeToAuthChange = (onChange: (user: User | null) => void) =>
-  onAuthStateChanged(auth, onChange);
+const subscribeToAuthChange = (onChange: (user: User | null) => void) => onAuthStateChanged(auth, onChange)
 
 const AuthService = {
   signup,
   login,
   logout,
-  subscribeToAuthChange,
-};
+  subscribeToAuthChange
+}
 
-export default AuthService;
+export default AuthService
