@@ -7,7 +7,10 @@ import { LoadingButton } from '@mui/lab'
 import { useMutation } from '@tanstack/react-query'
 import AuthService from '../../services/AuthService'
 import { SignupInput } from '../../types/Auth'
-import { useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import AuthLayout from './components/AuthLayout'
+import { Grid, Link } from '@mui/material'
+import Center from '../../components/Center'
 
 const Register: React.FC = () => {
   const formContext = useForm<SignupInput>({
@@ -39,11 +42,34 @@ const Register: React.FC = () => {
   }
 
   return (
-    <FormContainer formContext={formContext} onSuccess={handleSubmit}>
-      <TextFieldElement name={'email'} />
-      <PasswordElement name={'password'} />
-      <LoadingButton loading={isLoading}>Signup</LoadingButton>
-    </FormContainer>
+    <AuthLayout title="Welcome!">
+      <FormContainer formContext={formContext} onSuccess={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextFieldElement fullWidth name={'firstName'} label={'First Name'} />
+          </Grid>
+          <Grid item xs={12}>
+            <TextFieldElement fullWidth name={'lastName'} label={'Last Name'} />
+          </Grid>
+          <Grid item xs={12}>
+            <TextFieldElement fullWidth name={'email'} label={'Email'} />
+          </Grid>
+          <Grid item xs={12}>
+            <PasswordElement fullWidth name={'password'} label={'Password'} />
+          </Grid>
+        </Grid>
+        <Center my={2}>
+          <LoadingButton fullWidth loading={isLoading}>
+            Register
+          </LoadingButton>
+        </Center>
+        <Center my={2}>
+          <Link underline="none" variant="body2" color="inherit" to="/register" component={RouterLink}>
+            Already have an account?
+          </Link>
+        </Center>
+      </FormContainer>
+    </AuthLayout>
   )
 }
 
