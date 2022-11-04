@@ -8,4 +8,5 @@ export interface SignupInput {
   lastName: string
   email: string
   password: string
+  manager?: boolean
 }
