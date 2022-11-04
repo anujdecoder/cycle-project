@@ -20,14 +20,12 @@ const Login: React.FC = () => {
     },
     resolver: yupResolver(
       yup.object({
-        email: yup.string().email('Enter valid email').required('Required'),
-        password: yup
+        email: yup
           .string()
+          .email('Enter valid email')
           .required('Required')
-          .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-            'Choose a password with at least 8 characters. Choose a mixture of upper and lower case letters, numbers, and symbols.'
-          )
+          .max(100, 'Should be less than 100 characters'),
+        password: yup.string().required('Required').max(100, 'Should be less than 100 characters')
       })
     )
   })
@@ -53,7 +51,7 @@ const Login: React.FC = () => {
           </Grid>
         </Grid>
         <Center my={2}>
-          <LoadingButton fullWidth loading={isLoading}>
+          <LoadingButton fullWidth loading={isLoading} type="submit">
             Login
           </LoadingButton>
         </Center>

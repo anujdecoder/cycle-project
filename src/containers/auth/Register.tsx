@@ -15,11 +15,15 @@ import Center from '../../components/Center'
 const Register: React.FC = () => {
   const formContext = useForm<SignupInput>({
     defaultValues: {
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     },
     resolver: yupResolver(
       yup.object({
+        firstName: yup.string().required('Required').max(100, 'Should be less than 100 characters'),
+        lastName: yup.string().max(100, 'Should be less than 100 characters'),
         email: yup.string().email('Enter valid email').required('Required'),
         password: yup
           .string()
@@ -28,11 +32,12 @@ const Register: React.FC = () => {
             /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
             'Choose a password with at least 8 characters. Choose a mixture of upper and lower case letters, numbers, and symbols.'
           )
+          .max(100, 'Should be less than 100 characters')
       })
     )
   })
   const navigate = useNavigate()
-  const { mutateAsync, isLoading } = useMutation<any, any, SignupInput, any>(AuthService.login, {
+  const { mutateAsync, isLoading } = useMutation<any, any, SignupInput, any>(AuthService.register, {
     mutationKey: ['registerUser'],
     onSuccess: () => navigate('../')
   })
@@ -59,12 +64,12 @@ const Register: React.FC = () => {
           </Grid>
         </Grid>
         <Center my={2}>
-          <LoadingButton fullWidth loading={isLoading}>
+          <LoadingButton fullWidth loading={isLoading} type="submit">
             Register
           </LoadingButton>
         </Center>
         <Center my={2}>
-          <Link underline="none" variant="body2" color="inherit" to="/register" component={RouterLink}>
+          <Link underline="none" variant="body2" color="inherit" to="/login" component={RouterLink}>
             Already have an account?
           </Link>
         </Center>

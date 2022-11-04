@@ -10,7 +10,7 @@ import { LoginInput, SignupInput } from '../types/Auth'
 
 const auth = firebaseConfig.auth
 
-const signup = (input: SignupInput) => createUserWithEmailAndPassword(auth, input.email, input.password)
+const register = (input: SignupInput) => createUserWithEmailAndPassword(auth, input.email, input.password)
 
 const login = (input: LoginInput) => signInWithEmailAndPassword(auth, input.email, input.password)
 
@@ -19,7 +19,7 @@ const logout = () => signOut(auth)
 const subscribeToAuthChange = (onChange: (user: User | null) => void) => onAuthStateChanged(auth, onChange)
 
 const AuthService = {
-  signup,
+  register,
   login,
   logout,
   subscribeToAuthChange
