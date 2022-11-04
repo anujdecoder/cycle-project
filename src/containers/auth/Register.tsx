@@ -33,7 +33,7 @@ const Register: React.FC = () => {
   })
   const navigate = useNavigate()
   const { mutateAsync, isLoading } = useMutation<any, any, SignupInput, any>(AuthService.login, {
-    mutationKey: ['loginUser'],
+    mutationKey: ['registerUser'],
     onSuccess: () => navigate('../..')
   })
 
