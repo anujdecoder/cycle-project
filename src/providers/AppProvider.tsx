@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { getIdTokenResult, User } from 'firebase/auth'
 import { useImmer } from 'use-immer'
 import AuthService from '../services/AuthService'
+import { CircularProgress } from '@mui/material'
 
 interface Props {
   children?: React.ReactNode
@@ -57,7 +58,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     }
   }, [setState, state.user])
 
-  return <AppContext.Provider value={state}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={state}> {state.loading ? <CircularProgress /> : children}</AppContext.Provider>
 }
 
 export default AppProvider
