@@ -35,7 +35,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
   const { mutate, isLoading } = useMutation<any, any, LoginInput, any>(AuthService.login, {
     mutationKey: ['loginUser'],
-    onSuccess: () => navigate('../..')
+    onSuccess: () => navigate('..')
   })
   const handleSubmit = (input: LoginInput) => {
     mutate(input)

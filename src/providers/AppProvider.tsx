@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { User } from 'firebase/auth'
+import { getIdTokenResult, User } from 'firebase/auth'
 import { useImmer } from 'use-immer'
 import AuthService from '../services/AuthService'
 
@@ -8,15 +8,17 @@ interface Props {
 }
 
 type AppProviderType = {
-  loggedIn?: boolean
-  user?: User | null
-  loading?: boolean
+  loggedIn: boolean
+  user: User | null
+  loading: boolean
+  manager: boolean
 }
 
 const defaultValue: AppProviderType = {
   loggedIn: false,
   user: null,
-  loading: true
+  loading: true,
+  manager: false
 }
 
 const AppContext = React.createContext<AppProviderType>(defaultValue)
@@ -38,6 +40,22 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   React.useEffect(() => {
     AuthService.subscribeToAuthChange(handleUserChange)
   }, [handleUserChange])
+
+  React.useEffect(() => {
+    if (state.user) {
+      const fn = async () => {
+        const response = await getIdTokenResult(state.user!)
+        let manager = false
+        if (response.claims.isManager) {
+          manager = true
+        }
+        setState((draft) => {
+          draft.manager = manager
+        })
+      }
+      fn()
+    }
+  }, [setState, state.user])
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>
 }
