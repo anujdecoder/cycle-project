@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material'
 import theme from './configs/theme'
 import { SnackbarProvider } from 'notistack'
 import { BrowserRouter } from 'react-router-dom'
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
