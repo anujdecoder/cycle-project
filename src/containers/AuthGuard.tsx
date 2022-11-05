@@ -1,8 +1,8 @@
 import React from 'react'
-import { useApp } from '../../providers'
+import { useApp } from '../providers'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const Authenticate: React.FC = () => {
+const AuthGuard: React.FC = () => {
   const { loggedIn } = useApp()
 
   if (loggedIn) {
@@ -12,4 +12,4 @@ const Authenticate: React.FC = () => {
   return <Outlet />
 }
 
-export default Authenticate
+export default AuthGuard

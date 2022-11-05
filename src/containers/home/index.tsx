@@ -1,6 +1,4 @@
 import React, { lazy } from 'react'
-import { useApp } from '../../providers'
-import { Navigate } from 'react-router-dom'
 import { SubApp } from '../../types/subApp'
 import { FactCheckOutlined, GroupOutlined, TwoWheelerOutlined } from '@mui/icons-material'
 import Content from './Content'
@@ -31,14 +29,6 @@ const subApps: SubApp[] = [
   }
 ]
 
-const HomeRoutes: React.FC = () => {
-  const { loggedIn } = useApp()
-
-  if (!loggedIn) {
-    return <Navigate to={routes.LOGIN} />
-  }
-
-  return <Content subApps={subApps} />
-}
+const HomeRoutes: React.FC = () => <Content subApps={subApps} />
 
 export default HomeRoutes
