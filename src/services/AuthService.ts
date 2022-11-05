@@ -6,7 +6,7 @@ import {
   signOut,
   User
 } from 'firebase/auth'
-import { LoginInput, SignupInput } from '../types/Auth'
+import { LoginInput, SignupInput } from '../types/auth'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { UsersCollection } from '../configs/firestore'
 

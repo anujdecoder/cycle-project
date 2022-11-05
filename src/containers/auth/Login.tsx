@@ -6,7 +6,7 @@ import { FormContainer, PasswordElement, TextFieldElement } from 'react-hook-for
 import { LoadingButton } from '@mui/lab'
 import { useMutation } from '@tanstack/react-query'
 import AuthService from '../../services/AuthService'
-import { LoginInput } from '../../types/Auth'
+import { LoginInput } from '../../types/auth'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import AuthLayout from './components/AuthLayout'
 import { Grid, Link } from '@mui/material'

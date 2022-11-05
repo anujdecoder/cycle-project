@@ -5,10 +5,9 @@
 body {
     padding: 0;
     margin: 0;
-    height: 100vh;
     background-color: #eee;
 }
 
-#root {
+html, body, #root {
     height: 100%;
 }

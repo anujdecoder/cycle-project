@@ -1,27 +1,39 @@
-import React from 'react'
-import { AppBar, Box, Stack, Toolbar, Typography } from '@mui/material'
+import React, { lazy } from 'react'
+import { SubApp } from '../../types/subApp'
+import { FactCheckOutlined, GroupOutlined, TwoWheelerOutlined } from '@mui/icons-material'
+import Content from './Content'
+import Container from '../../components/Container'
+
+const Reservations = lazy(() => import('../reservations'))
+const Bikes = lazy(() => import('../bikes'))
+const Users = lazy(() => import('../users'))
+
+const subApps: SubApp[] = [
+  {
+    icon: <FactCheckOutlined />,
+    title: 'My Reservations',
+    path: 'reservations',
+    component: Reservations
+  },
+  {
+    icon: <TwoWheelerOutlined />,
+    title: 'Bikes',
+    path: 'bikes',
+    component: Bikes
+  },
+  {
+    icon: <GroupOutlined />,
+    title: 'Users',
+    path: 'users',
+    component: Users
+  }
+]
 
 const Layout: React.FC = () => {
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Rent a Bike
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ width: 80 }}>
-          <Stack>
-            <div>My Reservations</div>
-            <div>Bikes</div>
-            <div>Users</div>
-          </Stack>
-        </Box>
-        <div>Content</div>
-      </Box>
-    </Box>
+    <Container>
+      <Content subApps={subApps} />
+    </Container>
   )
 }
 
