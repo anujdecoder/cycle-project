@@ -19,7 +19,7 @@ const Content: React.FC<Props> = ({ subApps }) => {
   return (
     <Flex flex={1} height="100%">
       <NavBar items={navItems} />
-      <Container>
+      <Container width="100%" className="main-area">
         <Routes>
           {items.map(({ path, component: C }) => (
             <Route path={path} element={<C />} />

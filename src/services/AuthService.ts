@@ -11,12 +11,12 @@ import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { UsersCollection } from '../configs/firestore'
 
 const auth = firebaseConfig.auth
-const db = firebaseConfig.db
+const firestore = firebaseConfig.firestore
 
 const register = async (input: SignupInput) => {
   const response = await createUserWithEmailAndPassword(auth, input.email, input.password)
   const user = response.user
-  return setDoc(doc(db, UsersCollection, user.uid), {
+  return setDoc(doc(firestore, UsersCollection, user.uid), {
     id: user.uid,
     firstName: input.firstName,
     lastName: input.lastName,
