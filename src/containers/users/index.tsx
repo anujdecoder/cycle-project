@@ -6,6 +6,7 @@ import FirestoreService from '../../services/FirestoreService'
 import { UsersCollection } from '../../configs/firestore'
 import { User } from '../../types/users'
 import { CircularProgress } from '@mui/material'
+import UserForm from './components/UserForm'
 
 interface Props {}
 
@@ -19,14 +20,16 @@ const Users: React.FC<Props> = () => {
       return userDoc.data() as User
     })
   })
+  const [open, setOpen] = React.useState(false)
 
   if (isLoading) {
     return <CircularProgress />
   }
 
   return (
-    <MainLayout title={'Users'} addTooltip="Invite a new user">
+    <MainLayout title={'Users'} addTooltip="Invite a new user" onAddClick={() => setOpen(true)}>
       <UsersTable users={data!} />
+      {open && <UserForm open={open} onClose={() => setOpen(false)} />}
     </MainLayout>
   )
 }
