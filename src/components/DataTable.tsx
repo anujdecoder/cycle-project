@@ -35,7 +35,6 @@ const DataTable: FC<TableGridProps> = ({ loading, loadMore, ...props }) => {
       sx={[
         {
           border: 'none',
-          height: 'calc(var(--100vh) - 256px)',
           '.MuiDataGrid-columnSeparator': { display: 'none' },
           '.MuiDataGrid-columnHeaderTitle': { fontWeight: '700' },
           '.MuiDataGrid-row': { ...(props.onRowClick ? { cursor: 'pointer' } : {}) },
