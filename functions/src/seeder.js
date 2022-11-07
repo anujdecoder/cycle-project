@@ -69,4 +69,4 @@ const main = () => {
   seedNormalUsers().catch(console.error)
 }
 
-main()
+// main()
