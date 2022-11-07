@@ -4,31 +4,39 @@ import FormDialog from '../../../components/FormDialog'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Grid } from '@mui/material'
 import { CheckboxElement, FormContainer, PasswordElement, TextFieldElement } from 'react-hook-form-mui'
-import FirestoreService from '../../../services/FirestoreService'
-import { UsersCollection } from '../../../configs/firestore'
-import { omit } from 'lodash-es'
-import { getFunctions, httpsCallable } from 'firebase/functions'
 
 interface Props {
   open: boolean
   onClose: () => void
   user?: User
+  loading?: boolean
+  formId: string
+  title: React.ReactNode
+  submitLabel?: React.ReactNode
+  onSubmit: (input: User) => void
+  hidePassword?: boolean
 }
 
-const formId = 'user-form'
-const functions = getFunctions()
-
-const UserForm: React.FC<Props> = ({ open, onClose, user }) => {
+const UserForm: React.FC<Props> = ({
+  open,
+  onClose,
+  user,
+  loading,
+  formId,
+  onSubmit,
+  title,
+  submitLabel,
+  hidePassword
+}) => {
   const formContext = useForm<User>({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
       password: '',
-      manager: false
+      manager: user?.manager || false
     },
     resolver: yupResolver(
       yup.object({
@@ -48,45 +56,9 @@ const UserForm: React.FC<Props> = ({ open, onClose, user }) => {
     )
   })
 
-  const queryClient = useQueryClient()
-  const { mutateAsync, isLoading } = useMutation<any, any, User, any>(
-    async (input) => {
-      const createUser = httpsCallable(functions, 'createUser')
-      const resp = await createUser({
-        firstName: user!.firstName,
-        lastName: user!.lastName,
-        email: user!.email,
-        password: user!.password,
-        manager: user!.manager
-      })
-      return FirestoreService.createDocument({
-        collection: UsersCollection,
-        document: { ...omit(input, 'password'), id: resp.data + '' }
-      })
-    },
-    {
-      mutationKey: ['inviteUser'],
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(['listUsers'])
-        onClose()
-      }
-    }
-  )
-
-  const handleSubmit = async (input: User) => {
-    await mutateAsync(input)
-  }
-
   return (
-    <FormDialog
-      formId={formId}
-      open={open}
-      onClose={onClose}
-      title={'Invite User'}
-      loading={isLoading}
-      submitLabel={'Invite'}
-    >
-      <FormContainer FormProps={{ id: formId }} formContext={formContext} onSuccess={handleSubmit}>
+    <FormDialog formId={formId} open={open} onClose={onClose} title={title} loading={loading} submitLabel={submitLabel}>
+      <FormContainer FormProps={{ id: formId }} formContext={formContext} onSuccess={onSubmit}>
         <Grid container spacing={2} pt={1}>
           <Grid item xs={12}>
             <TextFieldElement fullWidth name={'firstName'} label={'First Name'} />
@@ -98,9 +70,11 @@ const UserForm: React.FC<Props> = ({ open, onClose, user }) => {
           <Grid item xs={12}>
             <TextFieldElement fullWidth name={'email'} label={'Email'} />
           </Grid>
-          <Grid item xs={12}>
-            <PasswordElement fullWidth name={'password'} label={'Password'} />
-          </Grid>
+          {!hidePassword && (
+            <Grid item xs={12}>
+              <PasswordElement fullWidth name={'password'} label={'Password'} />
+            </Grid>
+          )}
           <Grid item xs={12}>
             <CheckboxElement name={'manager'} label={'Invite as manager?'} />
           </Grid>
