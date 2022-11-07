@@ -3,6 +3,8 @@ import * as admin from "firebase-admin";
 
 export const SEED_KEY = "c49fd22c-05f9-40a0-b1ac-525803af7875";
 
+admin.initializeApp();
+
 exports.createUser = functions.https.onCall(async (data, context) => {
   if (context.auth?.token.manager || data.seedKey === SEED_KEY) {
     try {

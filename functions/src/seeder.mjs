@@ -21,21 +21,25 @@ const firestore = getFirestore(app)
 const functions = getFunctions(app)
 
 const seedUser = async user => {
-  const createUser = httpsCallable(functions, 'createUser')
-  const res = await createUser({
-    ...user,
-    password: 'Pass@123',
-    seedKey: SEED_KEY,
-  })
+  try {
+    const createUser = httpsCallable(functions, 'createUser')
+    const res = await createUser({
+      ...user,
+      password: 'Pass@123',
+      seedKey: SEED_KEY,
+    })
 
-  await setDoc(doc(firestore, USERS_COLLECTION, res.data + ''), {
-    ...user,
-    createdAt: serverTimestamp(),
-    id: res.data + '',
-    uid: res.data + '',
-  })
+    await setDoc(doc(firestore, USERS_COLLECTION, res.data + ''), {
+      ...user,
+      createdAt: serverTimestamp(),
+      id: res.data + '',
+      uid: res.data + '',
+    })
 
-  console.log(user.email, '- user added')
+    console.log(user.email, '- user added')
+  }catch (e){
+    console.error(e)
+  }
 }
 
 const seedAdminUser = async () => {
@@ -64,10 +68,11 @@ const seedNormalUsers = async () => {
   }
 }
 
-const main = () => {
+const main =async () => {
   console.log('Seeding....')
-  seedAdminUser().catch(console.error)
-  seedNormalUsers().catch(console.error)
+  await seedAdminUser().catch(console.error)
+  await seedNormalUsers().catch(console.error)
+  console.log('Seeding completed!')
 }
 
 main()
