@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { getIdTokenResult, User } from 'firebase/auth'
 import { useImmer } from 'use-immer'
 import AuthService from '../services/AuthService'
-import { CircularProgress } from '@mui/material'
+import Loading from '../components/Loading'
 
 interface Props {
   children?: React.ReactNode
@@ -19,7 +19,7 @@ const defaultValue: AppProviderType = {
   loggedIn: false,
   user: null,
   loading: true,
-  manager: false
+  manager: false,
 }
 
 const AppContext = React.createContext<AppProviderType>(defaultValue)
@@ -30,10 +30,10 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useImmer(defaultValue)
   const handleUserChange = useCallback(
     (user: User | null) => {
-      setState((draft) => {
+      setState(draft => {
         draft.user = user
         draft.loggedIn = !!user
-        draft.loading = false
+        draft.loading = Boolean(user)
       })
     },
     [setState]
@@ -50,15 +50,20 @@ const AppProvider: React.FC<Props> = ({ children }) => {
         if (response.claims.manager) {
           manager = true
         }
-        setState((draft) => {
+        setState(draft => {
           draft.manager = manager
+          draft.loading = false
         })
       }
       fn()
     }
   }, [setState, state.user])
 
-  return <AppContext.Provider value={state}> {state.loading ? <CircularProgress /> : children}</AppContext.Provider>
+  return (
+    <AppContext.Provider value={state}>
+      {state.loading ? <Loading /> : children}
+    </AppContext.Provider>
+  )
 }
 
 export default AppProvider

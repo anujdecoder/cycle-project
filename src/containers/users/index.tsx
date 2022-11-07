@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query'
 import FirestoreService from '../../services/FirestoreService'
 import { UsersCollection } from '../../configs/firestore'
 import { User } from '../../types/users'
-import { CircularProgress } from '@mui/material'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+import Loading from '../../components/Loading'
 
 interface Props {}
 
@@ -26,7 +26,7 @@ const Users: React.FC<Props> = () => {
   const userRef = React.useRef<User | null>(null)
 
   if (isLoading) {
-    return <CircularProgress />
+    return <Loading />
   }
 
   const handleUpdate = (u: User) => {

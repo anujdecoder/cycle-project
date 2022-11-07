@@ -7,7 +7,7 @@ const AppGuard: React.FC = () => {
   const { loggedIn } = useApp()
 
   if (!loggedIn) {
-    return <Navigate to={routes.LOGIN} />
+    return <Navigate to={'/' + routes.LOGIN} />
   }
 
   return <Outlet />
