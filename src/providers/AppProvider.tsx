@@ -47,7 +47,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       const fn = async () => {
         const response = await getIdTokenResult(state.user!)
         let manager = false
-        if (response.claims.isManager) {
+        if (response.claims.manager) {
           manager = true
         }
         setState((draft) => {

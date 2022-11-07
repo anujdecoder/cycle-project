@@ -9,7 +9,8 @@ import { Grid } from '@mui/material'
 import { CheckboxElement, FormContainer, PasswordElement, TextFieldElement } from 'react-hook-form-mui'
 import FirestoreService from '../../../services/FirestoreService'
 import { UsersCollection } from '../../../configs/firestore'
-import { omit, random } from 'lodash-es'
+import { omit } from 'lodash-es'
+import { getFunctions, httpsCallable } from 'firebase/functions'
 
 interface Props {
   open: boolean
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const formId = 'user-form'
+const functions = getFunctions()
 
 const UserForm: React.FC<Props> = ({ open, onClose, user }) => {
   const formContext = useForm<User>({
@@ -48,11 +50,20 @@ const UserForm: React.FC<Props> = ({ open, onClose, user }) => {
 
   const queryClient = useQueryClient()
   const { mutateAsync, isLoading } = useMutation<any, any, User, any>(
-    (input) =>
-      FirestoreService.createDocument({
+    async (input) => {
+      const createUser = httpsCallable(functions, 'createUser')
+      const resp = await createUser({
+        firstName: user!.firstName,
+        lastName: user!.lastName,
+        email: user!.email,
+        password: user!.password,
+        manager: user!.manager
+      })
+      return FirestoreService.createDocument({
         collection: UsersCollection,
-        document: { ...omit(input, 'password'), id: random().toString() }
-      }),
+        document: { ...omit(input, 'password'), id: resp.data + '' }
+      })
+    },
     {
       mutationKey: ['inviteUser'],
       onSuccess: async () => {

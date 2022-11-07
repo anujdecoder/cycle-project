@@ -13,3 +13,4 @@
 9. deploy code on firebase
 10. explore s1-copy project
 11. Create a checklist
+12. Setup envs
