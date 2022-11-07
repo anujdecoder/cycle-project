@@ -14,14 +14,24 @@ interface Props {
 const MainLayout: React.FC<Props> = ({ children, title, onAddClick, addTooltip = 'Add' }) => {
   return (
     <Container className="main-layout" pt={4} px={8} maxWidth={1080} margin="0 auto">
-      <Flex pt={1} pb={3} px={2} justifyContent="space-between" alignItems="center" className="header">
+      <Flex
+        pt={1}
+        pb={3}
+        px={2}
+        justifyContent="space-between"
+        alignItems="center"
+        className="header"
+      >
         <Typography sx={{ padding: '8px 8px 0' }} variant="h6">
           {title}
         </Typography>
         <Flex alignItems="center">
           {
             <Tooltip title={addTooltip}>
-              <IconButton onClick={onAddClick} sx={{ borderColor: 'divider', borderWidth: 1, borderStyle: 'solid' }}>
+              <IconButton
+                onClick={onAddClick}
+                sx={{ borderColor: 'divider', borderWidth: 1, borderStyle: 'solid' }}
+              >
                 <AddOutlined />
               </IconButton>
             </Tooltip>

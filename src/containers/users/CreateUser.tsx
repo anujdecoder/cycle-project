@@ -18,18 +18,18 @@ const functions = getFunctions()
 const CreateUser: React.FC<Props> = ({ open, onClose }) => {
   const queryClient = useQueryClient()
   const { mutateAsync, isLoading } = useMutation<any, any, User, any>(
-    async (user) => {
+    async user => {
       const createUser = httpsCallable(functions, 'createUser')
       const resp = await createUser({
         firstName: user!.firstName,
         lastName: user!.lastName,
         email: user!.email,
         password: user!.password,
-        manager: user!.manager
+        manager: user!.manager,
       })
       return FirestoreService.createDocument({
         collection: UsersCollection,
-        document: { ...omit(user, 'password'), id: resp.data + '' }
+        document: { ...omit(user, 'password'), id: resp.data + '' },
       })
     },
     {
@@ -37,7 +37,7 @@ const CreateUser: React.FC<Props> = ({ open, onClose }) => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(['listUsers'])
         onClose()
-      }
+      },
     }
   )
 

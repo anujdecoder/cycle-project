@@ -19,17 +19,17 @@ const functions = getFunctions()
 const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
   const queryClient = useQueryClient()
   const { mutateAsync, isLoading } = useMutation<any, any, User, any>(
-    async (input) => {
+    async input => {
       await FirestoreService.updateDocument({
-        id: input.id,
+        id: user.id,
         collection: UsersCollection,
-        document: omit(input, 'password')
+        document: omit(input, 'password'),
       })
       if (input.manager !== user.manager) {
         const updateRole = httpsCallable(functions, 'updateRole')
         await updateRole({
           userId: user.id,
-          manager: input!.manager
+          manager: input!.manager,
         })
       }
     },
@@ -38,7 +38,7 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(['listUsers'])
         onClose()
-      }
+      },
     }
   )
 

@@ -5,7 +5,12 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
 import { Grid } from '@mui/material'
-import { CheckboxElement, FormContainer, PasswordElement, TextFieldElement } from 'react-hook-form-mui'
+import {
+  CheckboxElement,
+  FormContainer,
+  PasswordElement,
+  TextFieldElement,
+} from 'react-hook-form-mui'
 
 interface Props {
   open: boolean
@@ -28,7 +33,7 @@ const UserForm: React.FC<Props> = ({
   onSubmit,
   title,
   submitLabel,
-  hidePassword
+  hidePassword,
 }) => {
   const formContext = useForm<User>({
     defaultValues: {
@@ -36,28 +41,39 @@ const UserForm: React.FC<Props> = ({
       lastName: user?.lastName || '',
       email: user?.email || '',
       password: '',
-      manager: user?.manager || false
+      manager: user?.manager || false,
     },
     resolver: yupResolver(
       yup.object({
         firstName: yup.string().required('Required').max(100, 'Should be less than 100 characters'),
         lastName: yup.string().max(100, 'Should be less than 100 characters'),
         email: yup.string().email('Enter valid email').required('Required'),
-        password: yup
-          .string()
-          .required('Required')
-          .matches(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-            'Choose a password with at least 8 characters. Choose a mixture of upper and lower case letters, numbers, and symbols.'
-          )
-          .max(100, 'Should be less than 100 characters'),
-        manager: yup.boolean()
+        manager: yup.boolean(),
+        ...(hidePassword
+          ? {}
+          : {
+              password: yup
+                .string()
+                .required('Required')
+                .matches(
+                  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                  'Choose a password with at least 8 characters. Choose a mixture of upper and lower case letters, numbers, and symbols.'
+                )
+                .max(100, 'Should be less than 100 characters'),
+            }),
       })
-    )
+    ),
   })
 
   return (
-    <FormDialog formId={formId} open={open} onClose={onClose} title={title} loading={loading} submitLabel={submitLabel}>
+    <FormDialog
+      formId={formId}
+      open={open}
+      onClose={onClose}
+      title={title}
+      loading={loading}
+      submitLabel={submitLabel}
+    >
       <FormContainer FormProps={{ id: formId }} formContext={formContext} onSuccess={onSubmit}>
         <Grid container spacing={2} pt={1}>
           <Grid item xs={12}>
