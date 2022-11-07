@@ -19,7 +19,7 @@ const DeleteUser: React.FC<Props> = ({ userId, open, onClose }) => {
     async () => {
       const deleteUser = httpsCallable(functions, 'deleteUser')
       await deleteUser({
-        userId
+        userId,
       })
       return FirestoreService.deleteDocument(UsersCollection, userId)
     },
@@ -28,7 +28,7 @@ const DeleteUser: React.FC<Props> = ({ userId, open, onClose }) => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(['listUsers'])
         onClose()
-      }
+      },
     }
   )
 
@@ -40,6 +40,7 @@ const DeleteUser: React.FC<Props> = ({ userId, open, onClose }) => {
       message={'Are you sure you want to continue?'}
       loading={isLoading}
       onConfirm={mutateAsync}
+      confirmLabel="Delete"
     />
   )
 }

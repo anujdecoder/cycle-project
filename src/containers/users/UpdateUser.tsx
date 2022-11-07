@@ -6,6 +6,8 @@ import FirestoreService from '../../services/FirestoreService'
 import { UsersCollection } from '../../configs/firestore'
 import { omit } from 'lodash-es'
 import UserForm from './components/UserForm'
+import { Button } from '@mui/material'
+import DeleteUser from './DeleteUser'
 
 interface Props {
   open: boolean
@@ -41,22 +43,31 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
       },
     }
   )
+  const [openDelete, setOpenDelete] = React.useState(false)
 
   const handleSubmit = async (input: User) => {
     await mutateAsync(input)
   }
   return (
-    <UserForm
-      formId={formId}
-      open={open}
-      onClose={onClose}
-      title="Update User"
-      submitLabel="Update"
-      onSubmit={handleSubmit}
-      loading={isLoading}
-      hidePassword
-      user={user}
-    />
+    <>
+      <UserForm
+        formId={formId}
+        open={open}
+        onClose={onClose}
+        title="Update User"
+        submitLabel="Update"
+        onSubmit={handleSubmit}
+        loading={isLoading}
+        hidePassword
+        user={user}
+        actions={
+          <Button color="warning" variant="outlined" onClick={() => setOpenDelete(true)}>
+            Delete
+          </Button>
+        }
+      />
+      <DeleteUser userId={user.id} open={openDelete} onClose={() => setOpenDelete(false)} />
+    </>
   )
 }
 

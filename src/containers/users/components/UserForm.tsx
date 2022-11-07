@@ -22,6 +22,7 @@ interface Props {
   submitLabel?: React.ReactNode
   onSubmit: (input: User) => void
   hidePassword?: boolean
+  actions?: React.ReactNode
 }
 
 const UserForm: React.FC<Props> = ({
@@ -34,6 +35,7 @@ const UserForm: React.FC<Props> = ({
   title,
   submitLabel,
   hidePassword,
+  actions,
 }) => {
   const formContext = useForm<User>({
     defaultValues: {
@@ -73,6 +75,7 @@ const UserForm: React.FC<Props> = ({
       title={title}
       loading={loading}
       submitLabel={submitLabel}
+      actions={actions}
     >
       <FormContainer FormProps={{ id: formId }} formContext={formContext} onSuccess={onSubmit}>
         <Grid container spacing={2} pt={1}>

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   IconButton,
   Tooltip,
-  Typography
+  Typography,
 } from '@mui/material'
 import { stopPropagation } from '../utils/utils'
 import { LoadingButton } from '@mui/lab'
@@ -23,6 +23,7 @@ interface Props {
   loading?: boolean
   cancelLabel?: React.ReactNode
   submitLabel?: React.ReactNode
+  actions?: React.ReactNode
 }
 
 const FormDialog: React.FC<Props> = ({
@@ -33,10 +34,17 @@ const FormDialog: React.FC<Props> = ({
   children,
   loading,
   cancelLabel = 'Cancel',
-  submitLabel = 'Save'
+  submitLabel = 'Save',
+  actions,
 }) => {
   return (
-    <Dialog open={open} onClose={onClose} onClick={stopPropagation} scroll="paper" disableEscapeKeyDown>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      onClick={stopPropagation}
+      scroll="paper"
+      disableEscapeKeyDown
+    >
       <DialogTitle>
         <Flex justifyContent="space-between" alignItems="center">
           <Typography variant="h6" sx={{ paddingTop: '8px' }}>
@@ -50,11 +58,14 @@ const FormDialog: React.FC<Props> = ({
         </Flex>
       </DialogTitle>
       <DialogContent sx={{ margin: '16px 0' }}>{children}</DialogContent>
-      <DialogActions sx={{ margin: '0 16px 16px' }}>
-        <Button variant="outlined">{cancelLabel}</Button>
-        <LoadingButton variant="contained" loading={loading} form={formId} type="submit">
-          {submitLabel}
-        </LoadingButton>
+      <DialogActions sx={{ margin: '0 16px 16px', justifyContent: 'space-between' }}>
+        {actions}
+        <Flex justifyContent="flex-end" width="100%" sx={{ '& button': { marginLeft: 1 } }}>
+          <Button variant="outlined">{cancelLabel}</Button>
+          <LoadingButton variant="contained" loading={loading} form={formId} type="submit">
+            {submitLabel}
+          </LoadingButton>
+        </Flex>
       </DialogActions>
     </Dialog>
   )

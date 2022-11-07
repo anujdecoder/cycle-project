@@ -7,7 +7,7 @@ import {
   DialogTitle,
   IconButton,
   Tooltip,
-  Typography
+  Typography,
 } from '@mui/material'
 import { stopPropagation } from '../utils/utils'
 import { LoadingButton } from '@mui/lab'
@@ -32,11 +32,19 @@ const ConfirmDialog: React.FC<Props> = ({
   onClose,
   loading,
   cancelLabel = 'Cancel',
-  confirmLabel = 'Save',
-  onConfirm
+  confirmLabel = 'Confirm',
+  onConfirm,
 }) => {
   return (
-    <Dialog open={open} onClose={onClose} onClick={stopPropagation} scroll="paper" disableEscapeKeyDown>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      onClick={stopPropagation}
+      scroll="paper"
+      disableEscapeKeyDown
+      fullWidth
+      maxWidth="xs"
+    >
       <DialogTitle>
         <Flex justifyContent="space-between" alignItems="center">
           <Typography variant="h6" sx={{ paddingTop: '8px' }}>
@@ -49,8 +57,8 @@ const ConfirmDialog: React.FC<Props> = ({
           </Tooltip>
         </Flex>
       </DialogTitle>
-      <DialogContent sx={{ margin: '16px 0' }}>
-        <Typography variant="subtitle2">{message}</Typography>
+      <DialogContent>
+        <Typography variant="body1">{message}</Typography>
       </DialogContent>
       <DialogActions sx={{ margin: '0 16px 16px' }}>
         <Button variant="outlined">{cancelLabel}</Button>
