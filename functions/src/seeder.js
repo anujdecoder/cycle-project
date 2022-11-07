@@ -65,8 +65,9 @@ const seedNormalUsers = async () => {
 }
 
 const main = () => {
+  console.log('Seeding....')
   seedAdminUser().catch(console.error)
   seedNormalUsers().catch(console.error)
 }
 
-// main()
+main()

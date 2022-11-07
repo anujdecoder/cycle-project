@@ -44,6 +44,10 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
     }
   )
   const [openDelete, setOpenDelete] = React.useState(false)
+  const handleDeleteClose = () => {
+    setOpenDelete(false)
+    onClose()
+  }
 
   const handleSubmit = async (input: User) => {
     await mutateAsync(input)
@@ -66,7 +70,7 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
           </Button>
         }
       />
-      <DeleteUser userId={user.id} open={openDelete} onClose={() => setOpenDelete(false)} />
+      <DeleteUser userId={user.id} open={openDelete} onClose={handleDeleteClose} />
     </>
   )
 }
