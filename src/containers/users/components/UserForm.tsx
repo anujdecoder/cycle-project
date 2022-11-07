@@ -4,7 +4,7 @@ import FormDialog from '../../../components/FormDialog'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
-import { Grid } from '@mui/material'
+import { Box, Fade, Grid, Typography } from '@mui/material'
 import {
   CheckboxElement,
   FormContainer,
@@ -67,6 +67,8 @@ const UserForm: React.FC<Props> = ({
     ),
   })
 
+  const managerValue = formContext.watch('manager')
+
   return (
     <FormDialog
       formId={formId}
@@ -97,6 +99,13 @@ const UserForm: React.FC<Props> = ({
           <Grid item xs={12}>
             <CheckboxElement name={'manager'} label={'Invite as manager?'} />
           </Grid>
+          {Boolean(user) && (
+            <Fade in={user!.manager !== managerValue}>
+              <Box px={2}>
+                <Typography variant="body2">Please ask user to login again</Typography>
+              </Box>
+            </Fade>
+          )}
         </Grid>
       </FormContainer>
     </FormDialog>
