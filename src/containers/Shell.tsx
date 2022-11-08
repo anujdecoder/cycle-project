@@ -1,12 +1,18 @@
 import React, { Suspense } from 'react'
 import { SubApp } from '../types/subApp'
-import { FactCheckOutlined, GroupOutlined, TwoWheelerOutlined } from '@mui/icons-material'
+import {
+  FactCheckOutlined,
+  GroupOutlined,
+  LogoutOutlined,
+  TwoWheelerOutlined,
+} from '@mui/icons-material'
 import routes from '../configs/routes'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Flex from '../components/Flex'
 import NavBar from '../components/NavBar'
 import Container from '../components/Container'
 import Loading from '../components/Loading'
+import AuthService from '../services/AuthService'
 
 interface Props {}
 
@@ -35,10 +41,18 @@ const subApps: SubApp[] = [...userApps, ...adminApps]
 
 const Shell: React.FC<Props> = () => {
   const navigate = useNavigate()
-  const navItems = React.useMemo(
+  const items = React.useMemo(
     () => subApps.map(i => ({ ...i, onClick: () => navigate(i.path) })),
     [navigate]
   )
+  const navItems = [
+    ...items,
+    {
+      icon: <LogoutOutlined />,
+      title: 'Logout',
+      onClick: AuthService.logout,
+    },
+  ]
 
   return (
     <Flex flex={1} height="100%">

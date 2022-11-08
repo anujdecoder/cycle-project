@@ -17,11 +17,21 @@ const NavBar: React.FC<Props> = ({ items }) => {
   return (
     <Paper elevation={0} sx={{ width: 64 }}>
       <Flex justifyContent="center">
-        <Box width={40} sx={theme => ({ fill: theme.palette.primary.main })}>
+        <Box
+          width={40}
+          height={40}
+          my={2.5}
+          p={0.5}
+          sx={theme => ({
+            fill: theme.palette.primary.main,
+            borderRadius: 20,
+            border: `2px solid ${theme.palette.primary.main}`,
+          })}
+        >
           <Logo />
         </Box>
       </Flex>
-      <Stack spacing={2} my={3}>
+      <Stack spacing={2}>
         {items.map(({ icon, title, onClick }, index) => (
           <Flex justifyContent="center">
             <Tooltip title={title} placement="right" arrow>

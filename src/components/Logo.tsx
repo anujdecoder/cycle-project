@@ -1,8 +1,6 @@
 import React from 'react'
 
-interface Props {}
-
-const Logo: React.FC<Props> = ({}) => {
+const Logo: React.FC = () => {
   return (
     <svg viewBox="0 0 96 96">
       <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)" stroke="none">
