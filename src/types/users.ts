@@ -8,14 +8,14 @@ export interface User {
 }
 
 export enum UserSortDirection {
-  ASC = 'asc',
-  DESC = 'desc',
+  ASC = "asc",
+  DESC = "desc",
 }
 
 export enum UserSortFields {
-  ID = 'id',
-  FIRST_NAME = 'firstName',
-  LAST_NAME = 'lastName',
-  EMAIL_NAME = 'email',
-  MANAGER = 'manager',
+  ID = "id",
+  FIRST_NAME = "firstName",
+  LAST_NAME = "lastName",
+  EMAIL_NAME = "email",
+  MANAGER = "manager",
 }

@@ -1,8 +1,8 @@
-import React from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useSnackbar } from 'notistack'
-import { AppProvider } from './providers'
-import Containers from './containers'
+import React from "react"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { useSnackbar } from "notistack"
+import { AppProvider } from "./providers"
+import Containers from "./containers"
 
 function App() {
   const { enqueueSnackbar } = useSnackbar()
@@ -12,14 +12,14 @@ function App() {
         cacheTime: 1000 * 60 * 60,
         refetchOnWindowFocus: true,
         retry: false,
-        staleTime: Infinity
+        staleTime: Infinity,
       },
       mutations: {
         onError: (e: any) => {
-          enqueueSnackbar(e.message, { variant: 'error' })
-        }
-      }
-    }
+          enqueueSnackbar(e.message, { variant: "error" })
+        },
+      },
+    },
   })
 
   return (

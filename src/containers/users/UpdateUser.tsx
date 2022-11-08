@@ -1,13 +1,13 @@
-import React from 'react'
-import { getFunctions, httpsCallable } from 'firebase/functions'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { User } from '../../types/users'
-import FirestoreService from '../../services/FirestoreService'
-import { UsersCollection } from '../../configs/firestore'
-import { omit } from 'lodash-es'
-import UserForm from './components/UserForm'
-import { Button } from '@mui/material'
-import DeleteUser from './DeleteUser'
+import React from "react"
+import { getFunctions, httpsCallable } from "firebase/functions"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { User } from "../../types/users"
+import FirestoreService from "../../services/FirestoreService"
+import { UsersCollection } from "../../configs/firestore"
+import { omit } from "lodash-es"
+import UserForm from "./components/UserForm"
+import { Button } from "@mui/material"
+import DeleteUser from "./DeleteUser"
 
 interface Props {
   open: boolean
@@ -15,7 +15,7 @@ interface Props {
   user: User
 }
 
-const formId = 'update-user-form'
+const formId = "update-user-form"
 const functions = getFunctions()
 
 const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
@@ -25,10 +25,10 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
       await FirestoreService.updateDocument({
         id: user.id,
         collection: UsersCollection,
-        document: omit(input, 'password'),
+        document: omit(input, "password"),
       })
       if (input.manager !== user.manager) {
-        const updateRole = httpsCallable(functions, 'updateRole')
+        const updateRole = httpsCallable(functions, "updateRole")
         await updateRole({
           userId: user.id,
           manager: input!.manager,
@@ -36,9 +36,9 @@ const UpdateUser: React.FC<Props> = ({ open, onClose, user }) => {
       }
     },
     {
-      mutationKey: ['updateUser'],
+      mutationKey: ["updateUser"],
       onSuccess: async () => {
-        await queryClient.invalidateQueries(['listUsers'])
+        await queryClient.invalidateQueries(["listUsers"])
         onClose()
       },
     }

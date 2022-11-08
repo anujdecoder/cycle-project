@@ -1,6 +1,6 @@
-import React from 'react'
-import { User } from '../../../types/users'
-import { useImmer } from 'use-immer'
+import React from "react"
+import { User } from "../../../types/users"
+import { useImmer } from "use-immer"
 
 interface State {
   showCreateDialog: boolean

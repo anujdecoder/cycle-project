@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react'
-import { getIdTokenResult, User } from 'firebase/auth'
-import { useImmer } from 'use-immer'
-import AuthService from '../services/AuthService'
-import Loading from '../components/Loading'
+import React, { useCallback } from "react"
+import { getIdTokenResult, User } from "firebase/auth"
+import { useImmer } from "use-immer"
+import AuthService from "../services/AuthService"
+import Loading from "../components/Loading"
 
 interface Props {
   children?: React.ReactNode

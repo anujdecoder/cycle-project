@@ -1,14 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
-import { ThemeProvider } from '@mui/material'
-import theme from './configs/theme'
-import { SnackbarProvider } from 'notistack'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import reportWebVitals from "./reportWebVitals"
+import { ThemeProvider } from "@mui/material"
+import theme from "./configs/theme"
+import { SnackbarProvider } from "notistack"
+import { BrowserRouter } from "react-router-dom"
+import "./index.css"
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -17,7 +17,7 @@ root.render(
           variant="info"
           transitionDuration={{ enter: 150, appear: 150, exit: 150 }}
           autoHideDuration={2000}
-          anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+          anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
           maxSnack={1}
           preventDuplicate
         >

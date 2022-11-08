@@ -1,31 +1,31 @@
-import React, { Suspense } from 'react'
-import { SubApp } from '../types/subApp'
+import React, { Suspense } from "react"
+import { SubApp } from "../types/subApp"
 import {
   FactCheckOutlined,
   GroupOutlined,
   LogoutOutlined,
   TwoWheelerOutlined,
-} from '@mui/icons-material'
-import routes from '../configs/routes'
-import { Outlet, useNavigate } from 'react-router-dom'
-import Flex from '../components/Flex'
-import NavBar from '../components/NavBar'
-import Container from '../components/Container'
-import Loading from '../components/Loading'
-import AuthService from '../services/AuthService'
-import { useApp } from '../providers'
+} from "@mui/icons-material"
+import routes from "../configs/routes"
+import { Outlet, useNavigate } from "react-router-dom"
+import Flex from "../components/Flex"
+import NavBar from "../components/NavBar"
+import Container from "../components/Container"
+import Loading from "../components/Loading"
+import AuthService from "../services/AuthService"
+import { useApp } from "../providers"
 
 interface Props {}
 
 export const userApps: SubApp[] = [
   {
     icon: <FactCheckOutlined />,
-    title: 'My Reservations',
+    title: "My Reservations",
     path: routes.RESERVATIONS,
   },
   {
     icon: <TwoWheelerOutlined />,
-    title: 'Bikes',
+    title: "Bikes",
     path: routes.BIKES,
   },
 ]
@@ -33,7 +33,7 @@ export const userApps: SubApp[] = [
 export const adminApps: SubApp[] = [
   {
     icon: <GroupOutlined />,
-    title: 'Users',
+    title: "Users",
     path: routes.USERS,
   },
 ]
@@ -49,7 +49,7 @@ const Shell: React.FC<Props> = () => {
     ...items,
     {
       icon: <LogoutOutlined />,
-      title: 'Logout',
+      title: "Logout",
       onClick: AuthService.logout, //todo: clear queries
     },
   ]

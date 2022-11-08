@@ -1,17 +1,17 @@
-import { CircularProgress, circularProgressClasses, CircularProgressProps } from '@mui/material'
-import Box from '@mui/material/Box'
-import { StandardCSSProperties } from '@mui/system'
-import { FC } from 'react'
-import Center from './Center'
+import React, { FC } from "react"
+import { CircularProgress, circularProgressClasses, CircularProgressProps } from "@mui/material"
+import Box from "@mui/material/Box"
+import { StandardCSSProperties } from "@mui/system"
+import Center from "./Center"
 
-const Loading: FC<CircularProgressProps & { position?: StandardCSSProperties['position'] }> = ({
-  position = 'absolute',
+const Loading: FC<CircularProgressProps & { position?: StandardCSSProperties["position"] }> = ({
+  position = "absolute",
   ...props
 }) => (
   <Center
     sx={{
-      width: '100%',
-      height: '100%',
+      width: "100%",
+      height: "100%",
       position,
       zIndex: 1,
       left: 0,
@@ -20,11 +20,11 @@ const Loading: FC<CircularProgressProps & { position?: StandardCSSProperties['po
       right: 0,
     }}
   >
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <CircularProgress
         variant="determinate"
         sx={{
-          color: theme => theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+          color: theme => theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
         }}
         size={40}
         thickness={4}
@@ -35,11 +35,11 @@ const Loading: FC<CircularProgressProps & { position?: StandardCSSProperties['po
         variant="indeterminate"
         disableShrink
         sx={{
-          animationDuration: '550ms',
-          position: 'absolute',
+          animationDuration: "550ms",
+          position: "absolute",
           left: 0,
           [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: 'round',
+            strokeLinecap: "round",
           },
         }}
         size={40}

@@ -42,7 +42,42 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "prettier/prettier": "error",
+      "arrow-body-style": [
+        "error",
+        "as-needed"
+      ],
+      "no-unused-expressions": "off",
+      "import/no-extraneous-dependencies": 0,
+      "no-console": "error",
+      "complexity": [
+        "error",
+        10
+      ],
+      "max-depth": [
+        "error",
+        {
+          "max": 10
+        }
+      ],
+      "max-params": [
+        "error",
+        3
+      ],
+      "max-statements": [
+        "error",
+        10
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -65,6 +100,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/yup": "^0.32.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.0"
   }
 }

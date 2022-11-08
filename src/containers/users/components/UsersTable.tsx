@@ -1,10 +1,10 @@
-import React from 'react'
-import { User, UserSortDirection, UserSortFields } from '../../../types/users'
-import DataTable from '../../../components/DataTable'
-import { GridColDef } from '@mui/x-data-grid'
-import { GridValueGetterParams } from '@mui/x-data-grid/models/params/gridCellParams'
-import { Button } from '@mui/material'
-import { GridSortDirection, GridSortModel } from '@mui/x-data-grid/models/gridSortModel'
+import React from "react"
+import { User, UserSortDirection, UserSortFields } from "../../../types/users"
+import DataTable from "../../../components/DataTable"
+import { GridColDef } from "@mui/x-data-grid"
+import { GridValueGetterParams } from "@mui/x-data-grid/models/params/gridCellParams"
+import { Button } from "@mui/material"
+import { GridSortDirection, GridSortModel } from "@mui/x-data-grid/models/gridSortModel"
 
 interface Props {
   users: User[]
@@ -27,21 +27,21 @@ const UsersTable: React.FC<Props> = ({
 }) => {
   const columns: GridColDef[] = React.useMemo(
     () => [
-      { field: 'firstName', headerName: 'First Name', flex: 3 },
-      { field: 'lastName', headerName: 'Last Name', flex: 3 },
-      { field: 'email', headerName: 'Email', flex: 5 },
+      { field: "firstName", headerName: "First Name", flex: 3 },
+      { field: "lastName", headerName: "Last Name", flex: 3 },
+      { field: "email", headerName: "Email", flex: 5 },
       {
-        field: 'manager',
-        headerName: 'Role',
+        field: "manager",
+        headerName: "Role",
         flex: 2,
         valueGetter: ({ row }: GridValueGetterParams<string, User>) =>
-          row.manager ? 'Manager' : 'User',
+          row.manager ? "Manager" : "User",
       },
       {
-        field: 'update',
+        field: "update",
         flex: 2,
         sortable: false,
-        headerName: '',
+        headerName: "",
         renderCell: ({ row }: GridValueGetterParams<string, User>) => (
           <Button size="small" variant="text" onClick={() => onEdit(row)}>
             Edit
@@ -60,10 +60,10 @@ const UsersTable: React.FC<Props> = ({
 
   return (
     <DataTable
-      localeText={{ noRowsLabel: loading ? '' : 'No users' }}
+      localeText={{ noRowsLabel: loading ? "" : "No users" }}
       columns={columns}
       rows={users}
-      sortModel={[{ field: sortBy ?? '', sort: sortDirection as GridSortDirection }]}
+      sortModel={[{ field: sortBy ?? "", sort: sortDirection as GridSortDirection }]}
       onSortModelChange={handleSortModalChange}
       loading={loading}
       loadMore={loadMore}

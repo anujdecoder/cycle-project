@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   Button,
   Dialog,
@@ -8,11 +8,11 @@ import {
   IconButton,
   Tooltip,
   Typography,
-} from '@mui/material'
-import { stopPropagation } from '../utils/utils'
-import { LoadingButton } from '@mui/lab'
-import Flex from './Flex'
-import { CloseOutlined } from '@mui/icons-material'
+} from "@mui/material"
+import { stopPropagation } from "../utils/utils"
+import { LoadingButton } from "@mui/lab"
+import Flex from "./Flex"
+import { CloseOutlined } from "@mui/icons-material"
 
 interface Props {
   formId: string
@@ -33,42 +33,40 @@ const FormDialog: React.FC<Props> = ({
   onClose,
   children,
   loading,
-  cancelLabel = 'Cancel',
-  submitLabel = 'Save',
+  cancelLabel = "Cancel",
+  submitLabel = "Save",
   actions,
-}) => {
-  return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      onClick={stopPropagation}
-      scroll="paper"
-      disableEscapeKeyDown
-    >
-      <DialogTitle>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Typography variant="h6" sx={{ paddingTop: '8px' }}>
-            {title}
-          </Typography>
-          <Tooltip title={'Close'}>
-            <IconButton onClick={onClose}>
-              <CloseOutlined fontSize="small" />
-            </IconButton>
-          </Tooltip>
-        </Flex>
-      </DialogTitle>
-      <DialogContent sx={{ margin: '16px 0' }}>{children}</DialogContent>
-      <DialogActions sx={{ margin: '0 16px 16px', justifyContent: 'space-between' }}>
-        {actions}
-        <Flex justifyContent="flex-end" width="100%" sx={{ '& button': { marginLeft: 1 } }}>
-          <Button variant="outlined">{cancelLabel}</Button>
-          <LoadingButton variant="contained" loading={loading} form={formId} type="submit">
-            {submitLabel}
-          </LoadingButton>
-        </Flex>
-      </DialogActions>
-    </Dialog>
-  )
-}
+}) => (
+  <Dialog
+    open={open}
+    onClose={onClose}
+    onClick={stopPropagation}
+    scroll="paper"
+    disableEscapeKeyDown
+  >
+    <DialogTitle>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Typography variant="h6" sx={{ paddingTop: "8px" }}>
+          {title}
+        </Typography>
+        <Tooltip title={"Close"}>
+          <IconButton onClick={onClose}>
+            <CloseOutlined fontSize="small" />
+          </IconButton>
+        </Tooltip>
+      </Flex>
+    </DialogTitle>
+    <DialogContent sx={{ margin: "16px 0" }}>{children}</DialogContent>
+    <DialogActions sx={{ margin: "0 16px 16px", justifyContent: "space-between" }}>
+      {actions}
+      <Flex justifyContent="flex-end" width="100%" sx={{ "& button": { marginLeft: 1 } }}>
+        <Button variant="outlined">{cancelLabel}</Button>
+        <LoadingButton variant="contained" loading={loading} form={formId} type="submit">
+          {submitLabel}
+        </LoadingButton>
+      </Flex>
+    </DialogActions>
+  </Dialog>
+)
 
 export default FormDialog

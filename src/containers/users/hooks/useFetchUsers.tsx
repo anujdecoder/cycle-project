@@ -1,9 +1,9 @@
-import React from 'react'
-import { useImmer } from 'use-immer'
-import { User, UserSortDirection, UserSortFields } from '../../../types/users'
-import { useInfiniteQuery } from '@tanstack/react-query'
-import FirestoreService from '../../../services/FirestoreService'
-import { UsersCollection } from '../../../configs/firestore'
+import React from "react"
+import { useImmer } from "use-immer"
+import { User, UserSortDirection, UserSortFields } from "../../../types/users"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import FirestoreService from "../../../services/FirestoreService"
+import { UsersCollection } from "../../../configs/firestore"
 
 interface State {
   sortBy: UserSortFields
@@ -19,7 +19,7 @@ const useFetchUsers = () => {
   })
 
   const { data, isFetching, refetch, fetchNextPage } = useInfiniteQuery(
-    ['listUsers'],
+    ["listUsers"],
     async ({ pageParam }) => {
       if (pageParam === -1) {
         return []
@@ -32,9 +32,7 @@ const useFetchUsers = () => {
         pageSize: PAGE_SIZE,
         cursorId: pageParam,
       })
-      return response.docs.map(userDoc => {
-        return userDoc.data() as User
-      })
+      return response.docs.map(userDoc => userDoc.data() as User)
     },
     {
       keepPreviousData: true,

@@ -1,9 +1,9 @@
-import { CheckBoxOutlined, IndeterminateCheckBoxOutlined } from '@mui/icons-material'
-import { DataGrid, DataGridProps } from '@mui/x-data-grid'
-import { debounce } from 'lodash-es'
-import React, { FC, useEffect, useRef } from 'react'
-import useUpdatedRef from '../hooks/useUpdatedRef'
-import { LinearProgress } from '@mui/material'
+import { CheckBoxOutlined, IndeterminateCheckBoxOutlined } from "@mui/icons-material"
+import { DataGrid, DataGridProps } from "@mui/x-data-grid"
+import { debounce } from "lodash-es"
+import React, { FC, useEffect, useRef } from "react"
+import useUpdatedRef from "../hooks/useUpdatedRef"
+import { LinearProgress } from "@mui/material"
 
 export type TableGridProps = DataGridProps & {
   loadMore?: () => void
@@ -16,7 +16,7 @@ const DataTable: FC<TableGridProps> = ({ loading, loadMore, ...props }) => {
 
   useEffect(() => {
     if (ref.current) {
-      const scrollEl = ref.current.querySelector('.MuiDataGrid-virtualScroller')
+      const scrollEl = ref.current.querySelector(".MuiDataGrid-virtualScroller")
       if (scrollEl) {
         const onScroll = debounce(() => {
           if (
@@ -26,9 +26,9 @@ const DataTable: FC<TableGridProps> = ({ loading, loadMore, ...props }) => {
             loadMoreRef.current?.()
           }
         }, 50)
-        scrollEl.addEventListener('scroll', onScroll)
+        scrollEl.addEventListener("scroll", onScroll)
         return () => {
-          scrollEl.removeEventListener('scroll', onScroll)
+          scrollEl.removeEventListener("scroll", onScroll)
         }
       }
     }
@@ -38,12 +38,12 @@ const DataTable: FC<TableGridProps> = ({ loading, loadMore, ...props }) => {
     <DataGrid
       sx={[
         {
-          border: 'none',
-          '.MuiDataGrid-columnSeparator': { display: 'none' },
-          '.MuiDataGrid-columnHeaderTitle': { fontWeight: '700' },
-          '.MuiDataGrid-row': { ...(props.onRowClick ? { cursor: 'pointer' } : {}) },
-          '.MuiDataGrid-virtualScroller': { ...(loading ? { opacity: 0.5 } : {}) },
-          '.MuiDataGrid-cell, .MuiDataGrid-columnHeader': { outline: 'none!important' },
+          border: "none",
+          ".MuiDataGrid-columnSeparator": { display: "none" },
+          ".MuiDataGrid-columnHeaderTitle": { fontWeight: "700" },
+          ".MuiDataGrid-row": { ...(props.onRowClick ? { cursor: "pointer" } : {}) },
+          ".MuiDataGrid-virtualScroller": { ...(loading ? { opacity: 0.5 } : {}) },
+          ".MuiDataGrid-cell, .MuiDataGrid-columnHeader": { outline: "none!important" },
         },
       ]}
       componentsProps={{

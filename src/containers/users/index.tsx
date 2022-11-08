@@ -1,10 +1,10 @@
-import React from 'react'
-import MainLayout from '../../components/MainLayout'
-import UsersTable from './components/UsersTable'
-import CreateUser from './CreateUser'
-import UpdateUser from './UpdateUser'
-import useUserDialogs from './hooks/useUserDialogs'
-import useFetchUsers from './hooks/useFetchUsers'
+import React from "react"
+import MainLayout from "../../components/MainLayout"
+import UsersTable from "./components/UsersTable"
+import CreateUser from "./CreateUser"
+import UpdateUser from "./UpdateUser"
+import useUserDialogs from "./hooks/useUserDialogs"
+import useFetchUsers from "./hooks/useFetchUsers"
 
 const Users: React.FC = () => {
   const { users, loading, sortBy, sortDirection, onSort, loadMore } = useFetchUsers()

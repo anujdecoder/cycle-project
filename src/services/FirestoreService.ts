@@ -15,9 +15,9 @@ import {
   startAfter,
   updateDoc,
   where,
-  WhereFilterOp
-} from 'firebase/firestore'
-import firebaseConfig from '../configs/firebase'
+  WhereFilterOp,
+} from "firebase/firestore"
+import firebaseConfig from "../configs/firebase"
 
 const firestore = firebaseConfig.firestore
 
@@ -26,40 +26,33 @@ interface SetDocumentInput {
   document: any
   id: string
 }
-const setDocument = (input: SetDocumentInput) => {
-  return setDoc(doc(firestore, input.collection, input.id), {
+const setDocument = (input: SetDocumentInput) =>
+  setDoc(doc(firestore, input.collection, input.id), {
     ...input.document,
-    createdAt: serverTimestamp()
+    createdAt: serverTimestamp(),
   })
-}
 
 interface CreateDocumentInput {
   collection: string
   document: any
 }
-const createDocument = (input: CreateDocumentInput) => {
-  return addDoc(collection(firestore, input.collection), {
+const createDocument = (input: CreateDocumentInput) =>
+  addDoc(collection(firestore, input.collection), {
     ...input.document,
-    createdAt: serverTimestamp()
+    createdAt: serverTimestamp(),
   })
-}
 
 interface UpdateDocumentInput {
   collection: string
   document: any
   id: string
 }
-const updateDocument = (input: UpdateDocumentInput) => {
-  return updateDoc(doc(firestore, input.collection, input.id), input.document)
-}
+const updateDocument = (input: UpdateDocumentInput) =>
+  updateDoc(doc(firestore, input.collection, input.id), input.document)
 
-const deleteDocument = (collection: string, id: string) => {
-  return deleteDoc(doc(firestore, collection, id))
-}
+const deleteDocument = (collection: string, id: string) => deleteDoc(doc(firestore, collection, id))
 
-const readDocument = (collection: string, id: string) => {
-  return getDoc(doc(firestore, collection, id))
-}
+const readDocument = (collection: string, id: string) => getDoc(doc(firestore, collection, id))
 
 interface ReadDocumentsVariables {
   collectionName: string
@@ -73,13 +66,15 @@ interface ReadDocumentsVariables {
   pageSize?: number
   cursorId?: string
 }
+
+// eslint-disable-next-line max-statements
 const readDocuments = async ({
   collectionName,
   queries,
   orderByField,
   orderByDirection,
   pageSize,
-  cursorId
+  cursorId,
 }: ReadDocumentsVariables) => {
   const queryConstraints: QueryConstraint[] = []
 
@@ -110,7 +105,7 @@ const FirestoreService = {
   updateDocument,
   deleteDocument,
   readDocument,
-  readDocuments
+  readDocuments,
 }
 
 export default FirestoreService

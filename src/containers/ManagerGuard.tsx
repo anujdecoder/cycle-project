@@ -1,6 +1,6 @@
-import React from 'react'
-import { useApp } from '../providers'
-import { Navigate, Outlet } from 'react-router-dom'
+import React from "react"
+import { useApp } from "../providers"
+import { Navigate, Outlet } from "react-router-dom"
 
 interface Props {}
 
