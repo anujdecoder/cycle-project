@@ -50,7 +50,7 @@ const Shell: React.FC<Props> = () => {
     {
       icon: <LogoutOutlined />,
       title: 'Logout',
-      onClick: AuthService.logout,
+      onClick: AuthService.logout, //todo: clear queries
     },
   ]
 
