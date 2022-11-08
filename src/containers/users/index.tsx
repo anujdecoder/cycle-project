@@ -81,8 +81,10 @@ const Users: React.FC = () => {
       draft.sortBy = sortBy
       draft.sortDirection = sortDirection
     })
-    refetch()
   }
+  React.useEffect(() => {
+    refetch()
+  }, [state.sortBy, state.sortDirection, refetch])
 
   return (
     <MainLayout title="Users" addTooltip="Invite a new user" onAddClick={openCreateModal}>
