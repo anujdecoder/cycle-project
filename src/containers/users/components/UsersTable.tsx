@@ -15,7 +15,7 @@ const UsersTable: React.FC<Props> = ({ users, onEdit }) => {
     () => [
       { field: 'firstName', headerName: 'First Name', flex: 3 },
       { field: 'lastName', headerName: 'Last Name', flex: 3 },
-      { field: 'email', headerName: 'Email', flex: 3 },
+      { field: 'email', headerName: 'Email', flex: 5 },
       {
         field: 'manager',
         headerName: 'Role',
