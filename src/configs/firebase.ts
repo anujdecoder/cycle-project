@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const config = {
-  apiKey: 'AIzaSyAqw6hyyEtFNQc_fo66DffWQHTDDXK6b_I',
-  authDomain: 'cycle-project-8e606.firebaseapp.com',
-  projectId: 'cycle-project-8e606',
-  storageBucket: 'cycle-project-8e606.appspot.com',
-  messagingSenderId: '223601535964',
-  appId: '1:223601535964:web:abcb6b6962767febf1fd19',
-  databaseURL: 'https://cycle-project-8e606.firebaseio.com'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
 }
 
 const app = initializeApp(config)
@@ -18,7 +18,7 @@ const firestore = getFirestore(app)
 
 const firebaseConfig = {
   auth,
-  firestore
+  firestore,
 }
 
 export default firebaseConfig
