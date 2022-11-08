@@ -13,6 +13,7 @@ export enum UserSortDirection {
 }
 
 export enum UserSortFields {
+  ID = 'id',
   FIRST_NAME = 'firstName',
   LAST_NAME = 'lastName',
   EMAIL_NAME = 'email',
