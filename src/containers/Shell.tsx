@@ -13,6 +13,7 @@ import NavBar from '../components/NavBar'
 import Container from '../components/Container'
 import Loading from '../components/Loading'
 import AuthService from '../services/AuthService'
+import { useApp } from '../providers'
 
 interface Props {}
 
@@ -37,14 +38,13 @@ export const adminApps: SubApp[] = [
   },
 ]
 
-const subApps: SubApp[] = [...userApps, ...adminApps]
-
 const Shell: React.FC<Props> = () => {
   const navigate = useNavigate()
-  const items = React.useMemo(
-    () => subApps.map(i => ({ ...i, onClick: () => navigate(i.path) })),
-    [navigate]
-  )
+  const { manager } = useApp()
+  const items = React.useMemo(() => {
+    const subApps: SubApp[] = [...userApps, ...(manager ? adminApps : [])]
+    return subApps.map(i => ({ ...i, onClick: () => navigate(i.path) }))
+  }, [navigate, manager])
   const navItems = [
     ...items,
     {
