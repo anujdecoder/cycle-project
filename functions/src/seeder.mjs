@@ -1,22 +1,13 @@
-import { initializeApp } from 'firebase/app'
-import { doc, getFirestore, serverTimestamp, setDoc } from 'firebase/firestore'
-import { getFunctions, httpsCallable } from 'firebase/functions'
-import { faker } from '@faker-js/faker'
+import { initializeApp } from "firebase/app";
+import { doc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { faker } from "@faker-js/faker";
+import seederConfig from "./seederConfig.mjs";
 
 export const SEED_KEY = 'c49fd22c-05f9-40a0-b1ac-525803af7875'
 const USERS_COLLECTION = 'users'
 
-const config = {
-  apiKey: 'AIzaSyAqw6hyyEtFNQc_fo66DffWQHTDDXK6b_I',
-  authDomain: 'cycle-project-8e606.firebaseapp.com',
-  projectId: 'cycle-project-8e606',
-  storageBucket: 'cycle-project-8e606.appspot.com',
-  messagingSenderId: '223601535964',
-  appId: '1:223601535964:web:abcb6b6962767febf1fd19',
-  databaseURL: 'https://cycle-project-8e606.firebaseio.com',
-}
-
-const app = initializeApp(config)
+const app = initializeApp(seederConfig)
 const firestore = getFirestore(app)
 const functions = getFunctions(app)
 
