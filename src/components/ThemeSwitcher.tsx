@@ -1,6 +1,7 @@
 import React from "react"
 import { DarkMode } from "@mui/icons-material"
 import Center from "./Center"
+import { Theme } from "@mui/material"
 
 interface Props {
   toggleTheme: () => void
@@ -21,7 +22,7 @@ const ThemeSwitcher: React.FC<Props> = ({ toggleTheme }) => (
       cursor: "pointer",
     })}
   >
-    <DarkMode fontSize="large" />
+    <DarkMode fontSize="large" sx={(theme: Theme) => ({ color: theme.palette.text.primary })} />
   </Center>
 )
 

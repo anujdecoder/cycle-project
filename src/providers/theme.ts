@@ -18,7 +18,7 @@ const lightPalette: PaletteOptions = {
     main: "#7859ff",
   },
   success: {
-    main: "#4FCD6A",
+    main: "#2b8d42",
   },
   background: {
     default: "#eee",
@@ -36,17 +36,17 @@ const lightPalette: PaletteOptions = {
 
 const darkPalette: PaletteOptions = {
   primary: {
-    main: "#7267ef",
+    main: "#b38efc",
   },
   secondary: {
-    main: "#7267ef",
+    main: "#7f66e8",
   },
   success: {
-    main: "#4FCD6A",
+    main: "#2b8d42",
   },
   background: {
-    default: "#111936",
-    paper: "#212946",
+    default: "#262424",
+    paper: "#505257",
   },
   text: {
     primary: "#fff",

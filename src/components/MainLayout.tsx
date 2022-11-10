@@ -12,7 +12,13 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = ({ children, title, onAddClick, addTooltip = "Add" }) => (
-  <Container className="main-layout" px={8} maxWidth={1080} margin="0 auto">
+  <Container
+    className="main-layout"
+    px={8}
+    maxWidth={1080}
+    margin="0 auto"
+    sx={(theme: Theme) => ({ backgroundColor: theme.palette.background.default })}
+  >
     <Flex
       pt={4}
       pb={3}
@@ -22,7 +28,10 @@ const MainLayout: React.FC<Props> = ({ children, title, onAddClick, addTooltip =
       className="header"
       sx={(theme: Theme) => ({ backgroundColor: theme.palette.background.paper })}
     >
-      <Typography sx={{ padding: "8px 8px 0" }} variant="h6">
+      <Typography
+        sx={(theme: Theme) => ({ padding: "8px 8px 0", color: theme.palette.text.primary })}
+        variant="h6"
+      >
         {title}
       </Typography>
       <Flex alignItems="center">

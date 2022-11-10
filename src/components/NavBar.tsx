@@ -14,7 +14,7 @@ interface Props {
 }
 
 const NavBar: React.FC<Props> = ({ items }) => (
-  <Paper elevation={0} sx={{ width: 64 }}>
+  <Paper elevation={0} sx={{ width: 64, borderRadius: 0 }}>
     <Flex justifyContent="center">
       <Box
         width={40}
