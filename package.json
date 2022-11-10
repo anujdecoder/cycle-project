@@ -36,7 +36,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "deploy-functions": "firebase deploy --only functions"
   },
   "eslintConfig": {
     "extends": [
