@@ -2,17 +2,16 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
-import { ThemeProvider } from "@mui/material"
-import theme from "./configs/theme"
 import { SnackbarProvider } from "notistack"
 import { BrowserRouter } from "react-router-dom"
 import "./index.css"
+import { ThemeProvider } from "./providers"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <SnackbarProvider
           variant="info"
           transitionDuration={{ enter: 150, appear: 150, exit: 150 }}
