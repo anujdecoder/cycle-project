@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { doc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { faker } from "@faker-js/faker";
-import seederConfig from "./seederConfig.mjs";
+import config from "./config.mjs";
 
 export const SEED_KEY = 'c49fd22c-05f9-40a0-b1ac-525803af7875'
 const USERS_COLLECTION = 'users'
 
-const app = initializeApp(seederConfig)
+const app = initializeApp(config)
 const firestore = getFirestore(app)
 const functions = getFunctions(app)
 
