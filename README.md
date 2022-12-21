@@ -1,4 +1,8 @@
+# Cycle Project
 
+Just a sample project to explore firebase as backend and use firebase functions along with a React App. 
+
+Use this project as a template for future projects.
 
 ## TODOs
 
